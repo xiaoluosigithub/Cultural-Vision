@@ -1,0 +1,4 @@
+/* 给所有控件添加黑色边框 */
+* {
+    border: 1px solid black;
+}
