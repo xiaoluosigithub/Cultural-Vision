@@ -1,86 +1,81 @@
 #include "opentreethread.h"
 #include <QDir>
-#include <QFileInfoList>
-#include <QIcon>
+#include "protreeitem.h"
+#include "const.h"
 
-OpenTreeThread::OpenTreeThread(const QString &src_path, int file_count,
-                               QTreeWidget *self, QObject *parent)
-    : QThread(parent),
-    _src_path(src_path),
-    _file_count(file_count),
-    _self(self),
-    _bstop(false)
+OpenTreeThread::OpenTreeThread(const QString &src_path, QTreeWidget *self, QObject *parent)
+    :QThread(parent), _src_path(src_path), _self(self), _root(nullptr)
 {
+
 }
 
-void OpenTreeThread::OpenProTree(const QString &src_path, int &file_count, QTreeWidget *self)
+void OpenTreeThread::OpenProTree(
+    const QString &src_path,   // 项目根目录路径
+    QTreeWidget *self          // 树控件指针，用于添加节点
+    )
 {
-    QDir src_dir(src_path);
-    QString name = src_dir.dirName();
+    QDir src_dir(src_path);               // 创建 QDir 对象，用于操作目录
+    auto name = src_dir.dirName();        // 获取目录名称，作为项目名
 
-    // 创建根节点
-    auto *rootItem = new QTreeWidgetItem(self);
-    rootItem->setText(0, name);
-    rootItem->setIcon(0, QIcon(":/icon/dir.png"));
-    rootItem->setToolTip(0, src_path);
+    // 创建一个表示项目根节点的 ProTreeItem
+    auto * item = new ProTreeItem(self, name, src_path, TreeItemPro);
+    item->setData(0, Qt::DisplayRole, name);              // 设置显示名称
+    item->setData(0, Qt::DecorationRole, QIcon(":/icon/dir.png")); // 设置图标为文件夹图标
+    item->setData(0, Qt::ToolTipRole, src_path);         // 设置鼠标悬停提示为完整路径
 
-    // 递归加载
-    RecursiveProTree(src_path, file_count, rootItem);
+    _root = item;  // 保存根节点指针，供递归使用
+
+    // 调用递归函数，遍历项目目录，构建树结构
+    RecursiveProTree(src_path, self, _root, item, nullptr);
 }
+
 
 void OpenTreeThread::run()
 {
-    OpenProTree(_src_path, _file_count, _self);
-
-    if (_bstop)
-        return;
-
-    emit SigFinishProgress(_file_count);
+    OpenProTree(_src_path, _self);
 }
 
-void OpenTreeThread::RecursiveProTree(const QString &src_path, int &file_count, QTreeWidgetItem *parent)
+
+QTreeWidgetItem* OpenTreeThread::RecursiveProTree(
+    const QString &src_path,
+    QTreeWidget *self,
+    QTreeWidgetItem *root,
+    QTreeWidgetItem *parent,
+    QTreeWidgetItem *preitem // 输入为上层的最后节点
+    )
 {
     QDir src_dir(src_path);
     src_dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
     src_dir.setSorting(QDir::Name);
     QFileInfoList list = src_dir.entryInfoList();
 
-    for (const QFileInfo &fileInfo : std::as_const(list))
-    {
-        if (_bstop)
-            return;
+    QTreeWidgetItem *lastItem = preitem; // 记录当前层最后节点
 
-        if (fileInfo.isDir())
-        {
-            file_count++;
-            emit SigUpdateProgress(file_count);
+    for(int i = 0; i < list.size(); ++i) {
+        QFileInfo fileInfo = list.at(i);
+        bool bIsDir = fileInfo.isDir();
 
-            auto *item = new QTreeWidgetItem(parent);
-            item->setText(0, fileInfo.fileName());
-            item->setIcon(0, QIcon(":/icon/dir.png"));
-            item->setToolTip(0, fileInfo.absoluteFilePath());
+        ProTreeItem *item = new ProTreeItem(parent, fileInfo.fileName(), fileInfo.absoluteFilePath(),
+            _root, bIsDir ? TreeItemDir : TreeItemPic);
 
-            // 递归进入子目录
-            RecursiveProTree(fileInfo.absoluteFilePath(), file_count, item);
+        item->setData(0, Qt::DisplayRole, fileInfo.fileName());
+        item->setData(0, Qt::DecorationRole, QIcon(bIsDir ? ":/icon/dir.png" : ":/icon/pic.png"));
+        item->setData(0, Qt::ToolTipRole, fileInfo.absoluteFilePath());
+
+        // 链接链表
+        if (lastItem) {
+            auto * pre_proitem = dynamic_cast<ProTreeItem*>(lastItem);
+            pre_proitem->SetNextItem(item);
+            item->SetPreItem(lastItem);
         }
-        else
-        {
-            QString suffix = fileInfo.completeSuffix().toLower();
-            if (suffix != "png" && suffix != "jpeg" && suffix != "jpg")
-                continue;
+        lastItem = item;
 
-            file_count++;
-            emit SigUpdateProgress(file_count);
-
-            auto *item = new QTreeWidgetItem(parent);
-            item->setText(0, fileInfo.fileName());
-            item->setIcon(0, QIcon(":/icon/pic.png"));
-            item->setToolTip(0, fileInfo.absoluteFilePath());
+        // 如果是目录，递归进去
+        if (bIsDir) {
+            // 把当前最后节点传下去，递归内部继续延伸链表
+            lastItem = RecursiveProTree( fileInfo.absoluteFilePath(), self, _root, item, lastItem);
         }
     }
+    return lastItem; // 返回当前层最后的节点，供上层继续连接
 }
 
-void OpenTreeThread::SlotCancelProgress()
-{
-    _bstop = true;
-}

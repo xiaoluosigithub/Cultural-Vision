@@ -12,8 +12,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     opentreethread.cpp \
+    picbutton.cpp \
+    picshow.cpp \
     protree.cpp \
+    protreeitem.cpp \
     protreewidget.cpp \
+    removeprodialog.cpp \
     windowone.cpp \
     windowtwo.cpp
 
@@ -21,14 +25,20 @@ HEADERS += \
     const.h \
     mainwindow.h \
     opentreethread.h \
+    picbutton.h \
+    picshow.h \
     protree.h \
+    protreeitem.h \
     protreewidget.h \
+    removeprodialog.h \
     windowone.h \
     windowtwo.h
 
 FORMS += \
     mainwindow.ui \
+    picshow.ui \
     protree.ui \
+    removeprodialog.ui \
     windowone.ui \
     windowtwo.ui
 

@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QTreeWidget>
 #include "protreewidget.h"
+#include "picshow.h"
 
 namespace Ui { class WindowOne; }
 
@@ -32,6 +33,7 @@ protected:
 private:
     Ui::WindowOne *ui;
     QWidget * _protree;
+    QWidget * _picshow;
 };
 
 #endif // WINDOW_ONE_H

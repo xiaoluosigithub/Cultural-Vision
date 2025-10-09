@@ -26,6 +26,32 @@ WindowOne::WindowOne(QWidget *parent)
     auto * pro_tree_widget = dynamic_cast<ProTreeWidget*>(tree_widget);
 
     connect(this, &WindowOne::SigOpenPro, pro_tree_widget, &ProTreeWidget::SlotOpenPro);
+
+    // 创建图片页面
+    _picshow = new PicShow();
+    // 将图片页面展示到pic页面上
+    ui->picLayout->addWidget(_picshow);
+
+    // 基类转换子类
+    auto *pro_pic_show = dynamic_cast<PicShow*>(_picshow);
+
+    // 连接图片页面和项目树控件的信号与槽
+
+    // 当项目树控件选中项变化时，通知图片页面进行展示
+    connect(pro_tree_widget, &ProTreeWidget::SigUpdataSelected, pro_pic_show, &PicShow::SlotSelectItem);
+
+    // 当图片页面点击“下一张”按钮，通知项目树控件切换到下一个项目
+    connect(pro_pic_show, &PicShow::SigNextClicked, pro_tree_widget, &ProTreeWidget::SlotNextShow);
+
+    // 当图片页面点击“上一张”按钮，通知项目树控件切换到上一个项目
+    connect(pro_pic_show, &PicShow::SigPreClicked, pro_tree_widget, &ProTreeWidget::SlotPreShow);
+
+    // 当项目树控件中的图片更新时，通知图片页面刷新图片展示
+    connect(pro_tree_widget, &ProTreeWidget::SigUpdataPic, pro_pic_show, &PicShow::SlotUpdatePic);
+
+    // 当项目树控件需要清除选中项时，通知图片页面删除对应图片
+    connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_pic_show, &PicShow::SlotDeleteItem);
+
 }
 
 WindowOne::~WindowOne()
