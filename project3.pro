@@ -11,36 +11,50 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    opentreethread.cpp \
-    picbutton.cpp \
-    picshow.cpp \
-    protree.cpp \
-    protreeitem.cpp \
-    protreewidget.cpp \
-    removeprodialog.cpp \
-    windowone.cpp \
-    windowtwo.cpp
+    WindowOne/ProTree/opentreethread.cpp \
+    WindowOne/PicShow/picbutton.cpp \
+    WindowOne/PicShow/picshow.cpp \
+    WindowOne/ProTree/protree.cpp \
+    WindowOne/ProTree/protreeitem.cpp \
+    WindowOne/ProTree/protreewidget.cpp \
+    WindowOne/ProTree/removeprodialog.cpp \
+    WindowOne/windowone.cpp \
+    WindowOne/PicDetection/picdetection.cpp\
+    WindowTwo/windowtwo.cpp
+
 
 HEADERS += \
     const.h \
     mainwindow.h \
-    opentreethread.h \
-    picbutton.h \
-    picshow.h \
-    protree.h \
-    protreeitem.h \
-    protreewidget.h \
-    removeprodialog.h \
-    windowone.h \
-    windowtwo.h
+    WindowOne/ProTree/opentreethread.h \
+    WindowOne/PicShow/picbutton.h \
+    WindowOne/PicShow/picshow.h \
+    WindowOne/ProTree/protree.h \
+    WindowOne/ProTree/protreeitem.h \
+    WindowOne/ProTree/protreewidget.h \
+    WindowOne/ProTree/removeprodialog.h \
+    WindowOne/windowone.h \
+    WindowOne/PicDetection/picdetection.h \
+    WindowTwo/windowtwo.h
+
 
 FORMS += \
     mainwindow.ui \
-    picshow.ui \
-    protree.ui \
-    removeprodialog.ui \
-    windowone.ui \
-    windowtwo.ui
+    WindowOne/PicShow/picshow.ui \
+    WindowOne/ProTree/protree.ui \
+    WindowOne/ProTree/removeprodialog.ui \
+    WindowOne/windowone.ui \
+    WindowOne/PicDetection/picdetection.ui \
+    WindowTwo/windowtwo.ui
+
+INCLUDEPATH += \
+    $$PWD \
+    $$PWD/WindowOne \
+    $$PWD/WindowOne/ProTree \
+    $$PWD/WindowOne/PicShow \
+    $$PWD/WindowOne/PicDetection \
+    $$PWD/WindowTwo
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

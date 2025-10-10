@@ -39,26 +39,20 @@ PicShow::~PicShow()
     delete ui;
 }
 
-void PicShow::ReloadPic()
+// 返回主页面展示图片路径
+QString PicShow::GetSelectedPath()
 {
-    if(_selected_path != ""){
-        const auto &width = ui->gridLayout->geometry().width();
-        const auto &height = ui->gridLayout->geometry().height();
-        _pix_map.load(_selected_path);
-        _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio);
-        ui->label->setPixmap(_pix_map);
-
-    }
+    return _selected_path;
 }
 
 bool PicShow::event(QEvent *event)
 {
     switch(event->type()){
     case QEvent::Enter:
-        ShowPreNextBtns(true);
+        ShowPreNextBtns(true);   // 当鼠标进入窗口时，显示“上一张”和“下一张”按钮
         break;
     case QEvent::Leave:
-        ShowPreNextBtns(false);
+        ShowPreNextBtns(false);  // 当鼠标离开窗口时，隐藏“上一张”和“下一张”按钮
         break;
     default:
         break;
@@ -121,7 +115,7 @@ void PicShow::SlotUpdatePic(const QString &_path)
         const auto &height = ui->gridLayout->geometry().height();
         _pix_map.load(_selected_path);
         _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio);
-        ui->label->setPixmap(_pix_map);
+        ui->label->setPixmap(_pix_map); // 将图片展示
     }
 }
 

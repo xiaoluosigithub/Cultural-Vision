@@ -80,20 +80,7 @@
        <layout class="QVBoxLayout" name="picLayout"/>
       </item>
       <item>
-       <widget class="QWidget" name="widget_img" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>980</width>
-          <height>110</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="resLayout"/>
       </item>
      </layout>
     </widget>

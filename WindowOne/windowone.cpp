@@ -29,6 +29,7 @@ WindowOne::WindowOne(QWidget *parent)
 
     // 创建图片页面
     _picshow = new PicShow();
+
     // 将图片页面展示到pic页面上
     ui->picLayout->addWidget(_picshow);
 
@@ -51,6 +52,21 @@ WindowOne::WindowOne(QWidget *parent)
 
     // 当项目树控件需要清除选中项时，通知图片页面删除对应图片
     connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_pic_show, &PicShow::SlotDeleteItem);
+
+
+
+    _picdete = new PicDetection();
+    ui->resLayout->addWidget(_picdete);
+    auto * pro_res_show = dynamic_cast<PicDetection*>(_picdete);
+
+    // 当项目树控件选中项变化时，通知图片页面进行展示
+    connect(pro_tree_widget, &ProTreeWidget::SigUpdataSelected, pro_res_show, &PicDetection::SlotUpdatePicPath);
+
+    // 当项目树控件中的图片更新时，通知图片页面刷新图片展示
+    connect(pro_tree_widget, &ProTreeWidget::SigUpdataPic, pro_res_show, &PicDetection::SlotUpdatePicPath);
+
+    // 当项目树控件需要清除选中项时，通知图片页面删除对应图片
+    connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_res_show, &PicDetection::SlotDeletePath);
 
 }
 

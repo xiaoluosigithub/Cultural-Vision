@@ -9,6 +9,7 @@
 #include <QTreeWidget>
 #include "protreewidget.h"
 #include "picshow.h"
+#include "picdetection.h"
 
 namespace Ui { class WindowOne; }
 
@@ -34,6 +35,7 @@ private:
     Ui::WindowOne *ui;
     QWidget * _protree;
     QWidget * _picshow;
+    QWidget * _picdete;
 };
 
 #endif // WINDOW_ONE_H
