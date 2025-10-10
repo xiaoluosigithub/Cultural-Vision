@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    RecognizeImg/inference.cpp \
+    RecognizeImg/recognizeimgthread.cpp \
     WindowOne/ProTree/opentreethread.cpp \
     WindowOne/PicShow/picbutton.cpp \
     WindowOne/PicShow/picshow.cpp \
@@ -23,9 +25,12 @@ SOURCES += \
     WindowTwo/windowtwo.cpp
 
 
+
 HEADERS += \
     const.h \
     mainwindow.h \
+    RecognizeImg/inference.h \
+    RecognizeImg/recognizeimgthread.h \
     WindowOne/ProTree/opentreethread.h \
     WindowOne/PicShow/picbutton.h \
     WindowOne/PicShow/picshow.h \
@@ -35,8 +40,7 @@ HEADERS += \
     WindowOne/ProTree/removeprodialog.h \
     WindowOne/windowone.h \
     WindowOne/PicDetection/picdetection.h \
-    WindowTwo/windowtwo.h
-
+    WindowTwo/windowtwo.h \
 
 FORMS += \
     mainwindow.ui \
@@ -50,6 +54,7 @@ FORMS += \
 INCLUDEPATH += \
     $$PWD \
     $$PWD/WindowOne \
+    $$PWD/RecognizeImg \
     $$PWD/WindowOne/ProTree \
     $$PWD/WindowOne/PicShow \
     $$PWD/WindowOne/PicDetection \
@@ -60,6 +65,30 @@ INCLUDEPATH += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+# ---------------- OpenCV 配置 ----------------
+# Windows Release 版本
+CONFIG(release, debug|release): LIBS += -LE:/opencv/build/x64/vc16/lib/ -lopencv_world490
+# Windows Debug 版本
+else:CONFIG(debug, debug|release): LIBS += -LE:/opencv/build/x64/vc16/lib/ -lopencv_world490d
+
+# OpenCV 包含路径和依赖路径
+INCLUDEPATH += E:/opencv/build/include \    # 包含头文件目录
+               E:/opencv/build/include/opencv2 \
+
+DEPENDPATH += E:/opencv/build/include \
+              E:/opencv/build/include/opencv2 \
+
+# ---------------- ONNX Runtime 配置 ----------------
+# Windows Release 版本
+CONFIG(release, debug|release): LIBS += -LE:/onnxruntime/onnxruntime-win-x64-1.16.0/lib/ -lonnxruntime
+# Windows Debug 版本
+else:CONFIG(debug, debug|release): LIBS += -LE:/onnxruntime/onnxruntime-win-x64-1.16.0/lib/ -lonnxruntime
+
+# ONNX Runtime 包含路径和依赖路径
+INCLUDEPATH += E:/onnxruntime/onnxruntime-win-x64-1.16.0/include  # 头文件目录
+DEPENDPATH += E:/onnxruntime/onnxruntime-win-x64-1.16.0/include     # 库文件目录
 
 RESOURCES += \
     resource.qrc

@@ -49,37 +49,34 @@ QTreeWidgetItem* OpenTreeThread::RecursiveProTree(
     src_dir.setSorting(QDir::Name);
     QFileInfoList list = src_dir.entryInfoList();
 
-    QTreeWidgetItem *lastItem = preitem; // 当前层的最后节点
+    QTreeWidgetItem *lastItem = preitem; // 记录当前层最后节点
 
-    for (int i = 0; i < list.size(); ++i) {
+    for(int i = 0; i < list.size(); ++i) {
         QFileInfo fileInfo = list.at(i);
         bool bIsDir = fileInfo.isDir();
 
+        ProTreeItem *item = new ProTreeItem(parent, fileInfo.fileName(), fileInfo.absoluteFilePath(),
+                                            _root, bIsDir ? TreeItemDir : TreeItemPic);
+
+        item->setData(0, Qt::DisplayRole, fileInfo.fileName());
+        item->setData(0, Qt::DecorationRole, QIcon(bIsDir ? ":/icon/dir.png" : ":/icon/pic.png"));
+        item->setData(0, Qt::ToolTipRole, fileInfo.absoluteFilePath());
+
+        // 链接链表
+        if (lastItem) {
+            auto * pre_proitem = dynamic_cast<ProTreeItem*>(lastItem);
+            pre_proitem->SetNextItem(item);
+            item->SetPreItem(lastItem);
+        }
+        lastItem = item;
+
+        // 如果是目录，递归进去
         if (bIsDir) {
-            // 如果是文件夹，不创建节点，只递归进去
-            lastItem = RecursiveProTree(fileInfo.absoluteFilePath(), self, root, parent, lastItem);
-        } else {
-            // 仅对文件创建节点
-            ProTreeItem *item = new ProTreeItem(parent,
-                                                fileInfo.fileName(),
-                                                fileInfo.absoluteFilePath(),
-                                                _root,
-                                                TreeItemPic);
-
-            item->setData(0, Qt::DisplayRole, fileInfo.fileName());
-            item->setData(0, Qt::DecorationRole, QIcon(":/icon/pic.png"));
-            item->setData(0, Qt::ToolTipRole, fileInfo.absoluteFilePath());
-
-            // 维护链表
-            if (lastItem) {
-                auto *pre_proitem = dynamic_cast<ProTreeItem*>(lastItem);
-                pre_proitem->SetNextItem(item);
-                item->SetPreItem(lastItem);
-            }
-            lastItem = item;
+            // 把当前最后节点传下去，递归内部继续延伸链表
+            lastItem = RecursiveProTree( fileInfo.absoluteFilePath(), self, _root, item, lastItem);
         }
     }
-
-    return lastItem; // 返回当前层最后的节点
+    return lastItem; // 返回当前层最后的节点，供上层继续连接
 }
+
 

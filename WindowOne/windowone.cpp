@@ -38,19 +38,19 @@ WindowOne::WindowOne(QWidget *parent)
 
     // 连接图片页面和项目树控件的信号与槽
 
-    // 当项目树控件选中项变化时，通知图片页面进行展示
+    // 项目树控件选中项变化，通知图片页面进行展示
     connect(pro_tree_widget, &ProTreeWidget::SigUpdataSelected, pro_pic_show, &PicShow::SlotSelectItem);
 
-    // 当图片页面点击“下一张”按钮，通知项目树控件切换到下一个项目
+    // 图片页面点击“下一张”按钮，通知项目树控件切换到下一个项目
     connect(pro_pic_show, &PicShow::SigNextClicked, pro_tree_widget, &ProTreeWidget::SlotNextShow);
 
-    // 当图片页面点击“上一张”按钮，通知项目树控件切换到上一个项目
+    // 图片页面点击“上一张”按钮，通知项目树控件切换到上一个项目
     connect(pro_pic_show, &PicShow::SigPreClicked, pro_tree_widget, &ProTreeWidget::SlotPreShow);
 
-    // 当项目树控件中的图片更新时，通知图片页面刷新图片展示
+    // 项目树控件中的图片更新时，通知图片页面刷新图片展示
     connect(pro_tree_widget, &ProTreeWidget::SigUpdataPic, pro_pic_show, &PicShow::SlotUpdatePic);
 
-    // 当项目树控件需要清除选中项时，通知图片页面删除对应图片
+    // 项目树控件需要清除选中项时，通知图片页面删除对应图片
     connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_pic_show, &PicShow::SlotDeleteItem);
 
 
@@ -59,14 +59,16 @@ WindowOne::WindowOne(QWidget *parent)
     ui->resLayout->addWidget(_picdete);
     auto * pro_res_show = dynamic_cast<PicDetection*>(_picdete);
 
-    // 当项目树控件选中项变化时，通知图片页面进行展示
+    // 项目树控件选中项变化，更新图片路径
     connect(pro_tree_widget, &ProTreeWidget::SigUpdataSelected, pro_res_show, &PicDetection::SlotUpdatePicPath);
 
-    // 当项目树控件中的图片更新时，通知图片页面刷新图片展示
+    // 项目树控件中的图片更新，更新图片路径
     connect(pro_tree_widget, &ProTreeWidget::SigUpdataPic, pro_res_show, &PicDetection::SlotUpdatePicPath);
 
-    // 当项目树控件需要清除选中项时，通知图片页面删除对应图片
+    // 清楚选中项时 图片路径置空
     connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_res_show, &PicDetection::SlotDeletePath);
+
+
 
 }
 

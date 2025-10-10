@@ -5,6 +5,7 @@
 #include <QPropertyAnimation>
 #include <QDialog>
 #include <QString>
+#include <QFileInfo>
 
 namespace Ui {
 class PicShow;

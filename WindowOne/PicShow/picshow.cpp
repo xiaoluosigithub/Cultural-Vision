@@ -110,12 +110,38 @@ void PicShow::SlotSelectItem(const QString &path)
 void PicShow::SlotUpdatePic(const QString &_path)
 {
     _selected_path = _path;
-    if(_selected_path != ""){
-        const auto &width = ui->gridLayout->geometry().width();
-        const auto &height = ui->gridLayout->geometry().height();
-        _pix_map.load(_selected_path);
-        _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio);
-        ui->label->setPixmap(_pix_map); // 将图片展示
+
+    if (_selected_path.isEmpty()) {
+        ui->label->clear();
+        return;
+    }
+
+    QFileInfo fileInfo(_selected_path);
+
+    // 判断路径类型
+    if (fileInfo.isDir()) {
+        // 是文件夹，显示提示或图标
+        // QPixmap folderIcon(":/icon/dir.png"); // 可以换成合适的资源路径
+        // folderIcon = folderIcon.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        // ui->label->setPixmap(folderIcon);
+
+        // 显示文字提示
+        ui->label->setText("📁 当前路径是文件夹");
+
+        return;
+    }
+
+    // 文件（图片）情况
+    if (fileInfo.isFile()) {
+        const auto width = ui->gridLayout->geometry().width();
+        const auto height = ui->gridLayout->geometry().height();
+
+        if (_pix_map.load(_selected_path)) {
+            _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            ui->label->setPixmap(_pix_map);
+        } else {
+            ui->label->setText("⚠️ 无法加载图片");
+        }
     }
 }
 
