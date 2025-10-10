@@ -6,6 +6,7 @@
 #include <QDialog>
 #include <QString>
 #include <QFileInfo>
+#include <QFile>
 
 namespace Ui {
 class PicShow;

@@ -1,0 +1,60 @@
+/* ------------------------
+   PicDetection.qss
+   风格：仿 Google Chrome 简约现代风
+   ------------------------ */
+
+/* === 整体对话框 === */
+QDialog#PicDetection {
+    background-color: #f9f9fb;      /* 柔和浅灰背景 */
+    border: 1px solid #dcdfe3;
+    border-radius: 8px;
+    /* QSS 不支持 box-shadow，以下通过边框模拟层次 */
+    border-bottom: 2px solid #e0e3e7;
+}
+
+/* === 按钮样式 === */
+QPushButton {
+    background-color: #f1f3f4;      /* Chrome 按钮灰白底 */
+    color: #202124;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 15px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 6px 16px;
+    min-height: 36px;
+    /* transition 不支持，去掉 */
+}
+
+/* 按钮悬停时 */
+QPushButton:hover {
+    background-color: #e8eaed;
+    border-color: #c4c7cc;
+}
+
+/* 按钮按下时 */
+QPushButton:pressed {
+    background-color: #d2e3fc;
+    border-color: #1a73e8;
+    color: #174ea6;
+}
+
+/* === 标签样式（label_1 / label_2） === */
+QLabel {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    min-height: 70px;
+    color: #3c4043;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
+/* 鼠标悬停时略微提亮边框 */
+QLabel:hover {
+    border-color: #c4c7cc;
+    background-color: #fcfcfc;
+}
+
+/* === 布局间距（仅用于视觉参考，Qt 不识别 QHBoxLayout 样式） === */
+/* 若要设置间距，应在 UI 或 C++ 中使用 setSpacing(12); */

@@ -12,6 +12,7 @@ WindowTwo::WindowTwo(QWidget *parent)
 
     // 关闭按钮
     connect(ui->closeBtn, &QPushButton::clicked, this, &WindowTwo::handleClose);
+
 }
 
 WindowTwo::~WindowTwo()

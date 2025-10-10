@@ -29,8 +29,6 @@ std::vector<std::string> RecognizeImgThread::readLabels(const std::string &label
             labels.push_back(line);
         }
     }
-
-    std::cout << "Loaded " << labels.size() << " classes from " << labelFile << std::endl;
     return labels;
 }
 

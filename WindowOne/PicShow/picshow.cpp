@@ -32,6 +32,22 @@ PicShow::PicShow(QWidget *parent)
     connect(ui->nextBtn, &QPushButton::clicked, this, &PicShow::SigNextClicked);
     connect(ui->previousBtn, &QPushButton::clicked, this, &PicShow::SigPreClicked);
 
+    // 打开样式文件（这里假设 qss 文件放在资源文件中）
+    QFile qssFile(":/style/PicShow.qss");
+
+    // 检查文件是否成功打开（只读方式）
+    if (qssFile.open(QFile::ReadOnly)) {
+
+        // 读取整个 QSS 文件内容，并将其转换为 QString
+        QString style = QLatin1String(qssFile.readAll());
+
+        // 将样式表应用到当前对话框（this 指向 RemoveProDialog）
+        this->setStyleSheet(style);
+
+        // 关闭文件
+        qssFile.close();
+    }
+
 }
 
 PicShow::~PicShow()

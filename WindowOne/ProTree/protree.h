@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QTreeWidget>
+#include <QFile>
 
 namespace Ui {
 class ProTree;

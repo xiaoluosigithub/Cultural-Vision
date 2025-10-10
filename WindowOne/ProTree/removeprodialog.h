@@ -2,6 +2,7 @@
 #define REMOVEPRODIALOG_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class RemoveProDialog;

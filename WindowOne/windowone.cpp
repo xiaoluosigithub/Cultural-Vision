@@ -8,7 +8,25 @@ WindowOne::WindowOne(QWidget *parent)
     , ui(new Ui::WindowOne)
 {
     ui->setupUi(this);
-    setWindowTitle("窗口1");
+
+    // 打开样式文件（这里假设 qss 文件放在资源文件中）
+    QFile qssFile(":/style/WindowOne.qss");
+
+    // 检查文件是否成功打开（只读方式）
+    if (qssFile.open(QFile::ReadOnly)) {
+
+        // 读取整个 QSS 文件内容，并将其转换为 QString
+        QString style = QLatin1String(qssFile.readAll());
+
+        // 将样式表应用到当前对话框（this 指向 RemoveProDialog）
+        this->setStyleSheet(style);
+
+        // 关闭文件
+        qssFile.close();
+    }
+
+    this->setWindowTitle("图片分类");  // 设置窗口标题
+    this->setWindowIcon(QIcon(":/icon/core.png"));  // 设置窗口图标（需确保资源路径正确）
 
     // 关闭按钮
     connect(ui->closeBtn, &QPushButton::clicked, this, &WindowOne::handleClose);
@@ -67,9 +85,6 @@ WindowOne::WindowOne(QWidget *parent)
 
     // 清楚选中项时 图片路径置空
     connect(pro_tree_widget, &ProTreeWidget::SigClearSelected, pro_res_show, &PicDetection::SlotDeletePath);
-
-
-
 }
 
 WindowOne::~WindowOne()

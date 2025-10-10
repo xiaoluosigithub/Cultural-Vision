@@ -1,0 +1,101 @@
+/* ------------------------
+   RemoveProDialog.qss
+   风格：仿 Google Chrome 简约现代风
+   ------------------------ */
+
+/* === 主对话框整体样式 === */
+QDialog#RemoveProDialog {
+    background-color: #f9f9fb;           /* 柔和浅灰背景 */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    /* Qt 不支持 box-shadow，这里使用底边和浅阴影模拟 */
+    border-bottom: 2px solid #e3e6ea;
+}
+
+/* === 提示标签文字 === */
+QLabel#label {
+    background-color: #f9f9fb;
+    color: #202124;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid #dadce0;
+}
+
+/* === 复选框 === */
+QCheckBox {
+    color: #3c4043;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 14px;
+    spacing: 6px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+/* 悬停时浅灰背景 */
+QCheckBox:hover {
+    background-color: #f1f3f4;
+}
+
+/* === 对话框按钮区域 === */
+QDialogButtonBox {
+    background-color: transparent;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+    margin-top: 6px;
+}
+
+/* === 通用按钮 === */
+QPushButton {
+    background-color: #f1f3f4;
+    color: #202124;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 6px 16px;
+    min-height: 32px;
+}
+
+/* 悬停状态 */
+QPushButton:hover {
+    background-color: #e8eaed;
+    border-color: #c4c7cc;
+}
+
+/* 按下状态 */
+QPushButton:pressed {
+    background-color: #d2e3fc;
+    border-color: #1a73e8;
+    color: #174ea6;
+}
+
+/* === 默认按钮（OK） === */
+QPushButton:default {
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+}
+QPushButton:default:hover {
+    background-color: #1967d2;
+}
+QPushButton:default:pressed {
+    background-color: #174ea6;
+}
+
+/* === 取消按钮（Cancel） === */
+QPushButton#buttonBox QPushButton {
+    min-width: 80px;
+}
+QPushButton[objectName*="cancel"],
+QPushButton[text="Cancel"],
+QPushButton[text="取消"] {
+    background-color: #f1f3f4;
+    color: #3c4043;
+}
+
+/* === 通用布局间距 === */
+QVBoxLayout {
+    spacing: 12px;
+}

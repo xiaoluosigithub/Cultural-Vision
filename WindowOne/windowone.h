@@ -6,6 +6,7 @@
 #include <QWidget>
 #include "protree.h"
 #include <QFileDialog>
+#include <QFile>
 #include <QTreeWidget>
 #include "protreewidget.h"
 #include "picshow.h"

@@ -1,0 +1,123 @@
+/* ------------------------
+   ProTree.qss
+   风格：仿 Google Chrome 简约现代风
+   ------------------------ */
+
+/* === 主对话框 === */
+QDialog#ProTree {
+    background-color: #f9f9fb;        /* 柔和浅灰背景 */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    /* Qt QSS 不支持 box-shadow，用浅下边框模拟层次 */
+    border-bottom: 2px solid #e3e6ea;
+}
+
+/* === 顶部标题标签 “项目结构” === */
+QLabel#label {
+    background-color: #ffffff;
+    color: #202124;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid #dadce0;
+}
+
+/* === 工程树结构（自定义类 ProTreeWidget） === */
+ProTreeWidget {
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 14px;
+    color: #202124;
+    selection-background-color: #e8f0fe;   /* Chrome 蓝调选中 */
+    selection-color: #174ea6;
+    show-decoration-selected: 1;
+}
+
+/* 树项（子节点）间距 */
+QTreeView::item {
+    height: 26px;
+    padding: 4px 8px;
+    border: none;
+}
+
+/* 鼠标悬停高亮 */
+QTreeView::item:hover {
+    background-color: #f1f3f4;
+    border-radius: 4px;
+}
+
+/* 选中项 */
+QTreeView::item:selected {
+    background-color: #e8f0fe;
+    border-radius: 4px;
+    color: #174ea6;
+}
+
+/* === 分支线（隐藏） === */
+QTreeView::branch {
+    background: transparent;
+    border: none;
+}
+
+
+/* 展开 / 折叠箭头（包括根节点） */
+QTreeView::branch:has-children:closed {
+    image: url(:/icon/right.png);
+    padding-left: 0px;
+}
+
+QTreeView::branch:has-children:open {
+    image: url(:/icon/down.png);
+    padding-left: 0px;
+}
+
+
+
+/* === 滚动条（右侧） === */
+QScrollBar:vertical {
+    background: #f1f3f4;
+    width: 10px;
+    margin: 0;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #c4c7cc;
+    border-radius: 4px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #9aa0a6;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+/* === 滚动条（下方，防止树视图过宽时样式突兀） === */
+QScrollBar:horizontal {
+    background: #f1f3f4;
+    height: 10px;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal {
+    background: #c4c7cc;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: #9aa0a6;
+}
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
