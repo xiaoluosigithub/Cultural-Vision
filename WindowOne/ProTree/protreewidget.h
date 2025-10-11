@@ -66,13 +66,11 @@ public slots:
     void SlotOpenPro(const QString&  path);
 
     /**
-     * @brief 幻灯片下一张槽函数
+     * @brief 下一张槽函数
      */
     void SlotNextShow();
 
-    /**
-     * @brief 幻灯片上一张槽函数
-     */
+    // 上一张槽函数
     void SlotPreShow();
 
 signals:

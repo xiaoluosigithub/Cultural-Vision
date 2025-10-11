@@ -24,6 +24,7 @@ public:
 protected:
     // 重写event函数，可以在这里处理一些特殊的事件（如键盘、鼠标、绘图事件等）
     bool event(QEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     // 控制“上一张”和“下一张”按钮的显示与隐藏

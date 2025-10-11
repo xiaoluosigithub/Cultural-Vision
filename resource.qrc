@@ -29,11 +29,11 @@
         <file>icon/right.png</file>
         <file>icon/show.jpg</file>
         <file>icon/slideshow.png</file>
-        <file>style/style.qss</file>
         <file>style/PicDetection.qss</file>
         <file>style/PicShow.qss</file>
         <file>style/ProTree.qss</file>
         <file>style/RemoveProDialog.qss</file>
         <file>style/WindowOne.qss</file>
+        <file>style/MainWindow.qss</file>
     </qresource>
 </RCC>

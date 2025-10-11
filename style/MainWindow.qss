@@ -1,0 +1,117 @@
+/* ------------------------
+   MainWindow.qss
+   风格：简约 Google Chrome 风格，按钮统一颜色
+   ------------------------ */
+
+/* === 主窗口整体 === */
+QMainWindow#MainWindow {
+    background-color: #f9f9fb;           /* 柔和浅灰背景 */
+}
+
+/* === 中央区域整体 === */
+QWidget#centralwidget {
+    background-color: #f9f9fb;
+}
+
+/* === 左侧区域 === */
+QWidget#widget {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* === 右侧区域 === */
+QWidget#widget_2 {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* 按钮统一风格 */
+QPushButton {
+    background-color: #f1f3f4;           /* 灰白底 */
+    color: #202124;
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 15px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    min-height: 36px;
+}
+
+/* 鼠标悬停 */
+QPushButton:hover {
+    background-color: #e8eaed;
+    border-color: #c4c7cc;
+}
+
+/* 按下状态 */
+QPushButton:pressed {
+    background-color: #d2e3fc;
+    border-color: #1a73e8;
+    color: #174ea6;
+}
+
+/* === 菜单栏和状态栏 === */
+QMenuBar {
+    background-color: #f9f9fb;
+    border-bottom: 1px solid #e5e7eb;
+}
+QMenuBar::item {
+    spacing: 3px;
+    padding: 4px 12px;
+    background: transparent;
+}
+QMenuBar::item:selected {
+    background-color: #e8eaed;
+    border-radius: 4px;
+}
+QStatusBar {
+    background-color: #f9f9fb;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* === 滚动条样式 === */
+QScrollBar:vertical {
+    background: #f1f3f4;
+    width: 10px;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #c4c7cc;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #9aa0a6;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background: #f1f3f4;
+    height: 10px;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal {
+    background: #c4c7cc;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: #9aa0a6;
+}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+    width: 0;
+}
+
+/* 布局间距 */
+QHBoxLayout#horizontalLayout,
+QVBoxLayout#verticalLayout {
+    spacing: 8px;
+}

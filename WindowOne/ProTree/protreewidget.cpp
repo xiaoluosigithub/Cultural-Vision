@@ -142,6 +142,7 @@ void ProTreeWidget::SlotClosePro()
 
     // 清空右键选中节点指针，防止悬空指针
     _right_btn_item = nullptr;
+    emit SigUpdataPic("");
 }
 
 

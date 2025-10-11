@@ -77,6 +77,21 @@ bool PicShow::event(QEvent *event)
     return QDialog::event(event);
 }
 
+void PicShow::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event); // 调用父类默认行为
+
+    // 如果当前有图片，则随窗口调整大小重新缩放
+    if (!_pix_map.isNull()) {
+        QPixmap scaled = _pix_map.scaled(
+            ui->label->size(),           // 使用 label 的实际显示区域
+            Qt::KeepAspectRatio,         // 保持宽高比
+            Qt::SmoothTransformation     // 平滑缩放
+            );
+        ui->label->setPixmap(scaled);
+    }
+}
+
 void PicShow::ShowPreNextBtns(bool b_show)
 {
     if(!b_show && _b_btnvisible){
@@ -129,37 +144,69 @@ void PicShow::SlotUpdatePic(const QString &_path)
 
     if (_selected_path.isEmpty()) {
         ui->label->clear();
+        _pix_map = QPixmap(); // 清空缓存
         return;
     }
 
     QFileInfo fileInfo(_selected_path);
 
-    // 判断路径类型
     if (fileInfo.isDir()) {
-        // 是文件夹，显示提示或图标
-        // QPixmap folderIcon(":/icon/dir.png"); // 可以换成合适的资源路径
-        // folderIcon = folderIcon.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        // ui->label->setPixmap(folderIcon);
-
-        // 显示文字提示
         ui->label->setText("📁 当前路径是文件夹");
-
+        _pix_map = QPixmap(); // 清空缓存
         return;
     }
 
-    // 文件（图片）情况
     if (fileInfo.isFile()) {
-        const auto width = ui->gridLayout->geometry().width();
-        const auto height = ui->gridLayout->geometry().height();
-
-        if (_pix_map.load(_selected_path)) {
-            _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            ui->label->setPixmap(_pix_map);
+        QPixmap originalPix;
+        if (originalPix.load(_selected_path)) {
+            _pix_map = originalPix; // 保存原图
+            QPixmap scaled = _pix_map.scaled(
+                ui->label->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation
+                );
+            ui->label->setPixmap(scaled);
+            ui->label->setAlignment(Qt::AlignCenter);
         } else {
             ui->label->setText("⚠️ 无法加载图片");
+            _pix_map = QPixmap(); // 清空缓存
         }
     }
 }
+
+
+
+// void PicShow::SlotUpdatePic(const QString &_path)
+// {
+//     _selected_path = _path;
+
+//     if (_selected_path.isEmpty()) {
+//         ui->label->clear();
+//         return;
+//     }
+
+//     QFileInfo fileInfo(_selected_path);
+
+//     // 判断路径类型
+//     if (fileInfo.isDir()) {
+//         // 显示文字提示
+//         ui->label->setText("📁 当前路径是文件夹");
+//         return;
+//     }
+
+//     // 文件（图片）情况
+//     if (fileInfo.isFile()) {
+//         const auto width = ui->gridLayout->geometry().width();
+//         const auto height = ui->gridLayout->geometry().height();
+
+//         if (_pix_map.load(_selected_path)) {
+//             _pix_map = _pix_map.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+//             ui->label->setPixmap(_pix_map);
+//         } else {
+//             ui->label->setText("⚠️ 无法加载图片");
+//         }
+//     }
+// }
 
 void PicShow::SlotDeleteItem()
 {
