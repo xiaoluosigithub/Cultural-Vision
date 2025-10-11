@@ -22,7 +22,9 @@ SOURCES += \
     WindowOne/ProTree/removeprodialog.cpp \
     WindowOne/windowone.cpp \
     WindowOne/PicDetection/picdetection.cpp\
-    WindowTwo/windowtwo.cpp
+    WindowTwo/windowtwo.cpp \
+    WindowTwo/CameraThread/camerathread.cpp \
+    WindowTwo/settingdialog.cpp
 
 
 
@@ -41,6 +43,8 @@ HEADERS += \
     WindowOne/windowone.h \
     WindowOne/PicDetection/picdetection.h \
     WindowTwo/windowtwo.h \
+    WindowTwo/CameraThread/camerathread.h \
+    WindowTwo/settingdialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -49,7 +53,8 @@ FORMS += \
     WindowOne/ProTree/removeprodialog.ui \
     WindowOne/windowone.ui \
     WindowOne/PicDetection/picdetection.ui \
-    WindowTwo/windowtwo.ui
+    WindowTwo/windowtwo.ui \
+    WindowTwo/settingdialog.ui
 
 INCLUDEPATH += \
     $$PWD \
@@ -58,7 +63,8 @@ INCLUDEPATH += \
     $$PWD/WindowOne/ProTree \
     $$PWD/WindowOne/PicShow \
     $$PWD/WindowOne/PicDetection \
-    $$PWD/WindowTwo
+    $$PWD/WindowTwo \
+    $$PWD/WindowTwo/CameraThread
 
 
 # Default rules for deployment.
