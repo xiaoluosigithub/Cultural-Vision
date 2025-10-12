@@ -22,10 +22,27 @@ CameraThread::CameraThread(QObject *parent)
  */
 bool CameraThread::openCamera(int index)
 {
-    if (cap.open(index)) {  // 尝试打开指定索引的相机
-        return true;        // 打开成功返回true
+    // if (cap.open(index)) {  // 尝试打开指定索引的相机
+    //     return true;        // 打开成功返回true
+    // }
+    // return false;           // 打开失败返回false
+
+    // 尝试使用 DirectShow 后端
+    cap.open(index, cv::CAP_DSHOW);
+    if (!cap.isOpened()) {
+        // 再尝试默认方式
+        cap.open(index);
     }
-    return false;           // 打开失败返回false
+    return cap.isOpened();
+
+}
+
+bool CameraThread::getLastFrame(cv::Mat &outFrame)
+{
+    QMutexLocker locker(&frameMutex);
+    if (lastFrame.empty()) return false;
+    lastFrame.copyTo(outFrame);
+    return true;
 }
 
 /**
@@ -46,6 +63,12 @@ void CameraThread::run()
 
         // 如果捕获到的帧为空（可能由于读取错误或相机断开），跳过此次循环
         if (frame.empty()) continue;
+
+        {
+            // ✅ 保存最新帧（线程安全）
+            QMutexLocker locker(&frameMutex);
+            frame.copyTo(lastFrame);
+        }
 
         // 将OpenCV的Mat格式帧转换为Qt的QImage格式
         // frame.data: 图像数据指针

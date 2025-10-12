@@ -341,6 +341,7 @@ char* YOLO_V8::WarmUpSession() {
         // 如果开启CUDA模式，打印耗时信息
         if (cudaEnable)
         {
+            std::cout << cudaEnable << std::endl;
             std::cout << "[YOLO_V8(CUDA)]: " << "Cuda warm-up cost "
                       << post_process_time << " ms. " << std::endl;
         }

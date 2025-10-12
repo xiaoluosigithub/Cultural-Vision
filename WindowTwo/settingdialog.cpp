@@ -1,6 +1,5 @@
 #include "settingdialog.h"
 #include "ui_settingdialog.h"
-#include <QDebug>
 #include <opencv2/opencv.hpp>
 #include <QMessageBox>
 
@@ -32,7 +31,6 @@ SettingDialog::SettingDialog(QWidget *parent)
     , ui(new Ui::SettingDialog)
 {
     ui->setupUi(this);
-    qDebug() << ">>> SettingDialog 构造";
 
     connect(ui->btnOK, &QPushButton::clicked, this, &SettingDialog::on_btnOK_clicked);
     connect(ui->btnCancel, &QPushButton::clicked, this, &SettingDialog::on_btnCancel_clicked);
