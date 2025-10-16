@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/close.png</file>
+        <file>icon/dir.png</file>
+        <file>icon/down.png</file>
+        <file>icon/main_img.png</file>
+        <file>icon/next.png</file>
+        <file>icon/next_hover.png</file>
+        <file>icon/next_press.png</file>
+        <file>icon/openpro.png</file>
+        <file>icon/pic.png</file>
+        <file>icon/previous.png</file>
+        <file>icon/previous_hover.png</file>
+        <file>icon/previous_press.png</file>
+        <file>icon/right.png</file>
+        <file>icon/window_one.png</file>
+        <file>icon/window_two.png</file>
+        <file>style/MainWindow.qss</file>
+        <file>style/PicDetection.qss</file>
+        <file>style/PicShow.qss</file>
+        <file>style/ProTree.qss</file>
+        <file>style/RemoveProDialog.qss</file>
+        <file>style/WindowOne.qss</file>
+        <file>style/WindowTwo.qss</file>
+        <file>style/SettingDialog.qss</file>
+        <file>model/best.onnx</file>
+        <file>label/class_names.txt</file>
+        <file>icon/mainImg2.png</file>
+        <file>icon/11.png</file>
+        <file>icon/12.png</file>
+        <file>icon/16.ico</file>
+    </qresource>
+</RCC>

@@ -168,7 +168,7 @@
         <item>
          <widget class="QLabel" name="resultLabel">
           <property name="text">
-           <string>检测结果：苹果</string>
+           <string>检测结果：--</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -178,7 +178,7 @@
         <item>
          <widget class="QLabel" name="conLabel">
           <property name="text">
-           <string>置信度：99.99%</string>
+           <string>置信度：--</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>

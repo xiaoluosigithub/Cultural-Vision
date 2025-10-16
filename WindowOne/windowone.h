@@ -4,10 +4,10 @@
 
 #include <QDialog>
 #include <QWidget>
-#include "protree.h"
 #include <QFileDialog>
 #include <QFile>
 #include <QTreeWidget>
+#include "protree.h"
 #include "protreewidget.h"
 #include "picshow.h"
 #include "picdetection.h"

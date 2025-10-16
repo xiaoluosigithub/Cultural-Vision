@@ -13,6 +13,8 @@ void RecognizeImgThread::run()
     RecognizeImg(classNames, image, _model_path); // 识别
 }
 
+
+
 std::vector<std::string> RecognizeImgThread::readLabels(const std::string &labelFile)
 {
     std::vector<std::string> labels;

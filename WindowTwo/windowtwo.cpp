@@ -1,7 +1,6 @@
 // window_two.cpp
 #include "windowtwo.h"
 #include "ui_windowtwo.h"
-#include <QCloseEvent>
 
 WindowTwo::WindowTwo(QWidget *parent)
     : QDialog(parent)
@@ -9,7 +8,24 @@ WindowTwo::WindowTwo(QWidget *parent)
     , cameraThread(new CameraThread(this))
 {
     ui->setupUi(this);
-    setWindowTitle("窗口2");
+    this->setWindowTitle("实时检测");
+    this->setWindowIcon(QIcon(":/icon/window_two.png"));  // 设置窗口图标
+
+    // 打开样式文件（这里假设 qss 文件放在资源文件中）
+    QFile qssFile(":/style/WindowTwo.qss");
+
+    // 检查文件是否成功打开（只读方式）
+    if (qssFile.open(QFile::ReadOnly)) {
+
+        // 读取整个 QSS 文件内容，并将其转换为 QString
+        QString style = QLatin1String(qssFile.readAll());
+
+        // 将样式表应用到当前对话框（this 指向 RemoveProDialog）
+        this->setStyleSheet(style);
+
+        // 关闭文件
+        qssFile.close();
+    }
 
     // 关闭按钮
     connect(ui->closeBtn, &QPushButton::clicked, this, &WindowTwo::handleClose);
@@ -25,6 +41,10 @@ WindowTwo::WindowTwo(QWidget *parent)
     // ---- 初始化状态 ----
     ui->btnStop->setEnabled(false);   // “停止检测”开始时不可用
     ui->statusLabel->setText("待机");
+
+    labelPath = LABEL_PATH;
+    modelPath = MODEL_PATH;
+
 }
 
 
@@ -93,11 +113,14 @@ void WindowTwo::on_btnStop_clicked()
         recognizeThread = nullptr;
     }
 
+    qApp->processEvents(); // ⚠️ 强制刷新界面
+
     // 清除相机显示区域并显示状态信息
     ui->cameraLabel->clear();
     ui->cameraLabel->setText("摄像头已关闭");
-
     ui->resultLabel->setText("识别结果：--");
+    ui->conLabel->setText("置信度：--");
+    ui->statusLabel->setText("✅ 检测已停止");
 
     // ---- 新增：恢复所有按钮可用状态 ----
     ui->btnStart->setEnabled(true);
@@ -105,7 +128,6 @@ void WindowTwo::on_btnStop_clicked()
     ui->closeBtn->setEnabled(true);
     ui->btnStop->setEnabled(false);
 
-    ui->statusLabel->setText("✅ 检测已停止");
 }
 
 void WindowTwo::on_setBtn_clicked()
@@ -147,10 +169,7 @@ void WindowTwo::updateFrame(const QImage &image)
 
 void WindowTwo::onRecognizeSuccess(QString className, float confidence)
 {
-    // ui->resultLabel->setText(QString("识别结果：%1 (置信度：%2%)")
-    //                              .arg(className)
-    //                              .arg(confidence * 100, 0, 'f', 2)); // 保留两位小数
-
+    confidence = (confidence * 100.0f > 99.99f) ? 99.99f : confidence * 100.0f ;
     ui->resultLabel->setText(QString("识别结果：%1 ").arg(className));
     ui->conLabel->setText(QString("置信度 %1%").arg(confidence, 0, 'f', 2));
 }

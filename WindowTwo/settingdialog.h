@@ -5,6 +5,9 @@
 #include <QStringList>
 #include <QThread>
 #include <QTimer>
+#include <opencv2/opencv.hpp>
+#include <QMessageBox>
+#include <QFile>
 
 namespace Ui {
 class SettingDialog;

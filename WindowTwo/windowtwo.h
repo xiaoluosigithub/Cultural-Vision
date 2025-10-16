@@ -5,10 +5,13 @@
 #include "camerathread.h"
 #include "settingdialog.h"
 #include "recognizeimgthread.h"
+#include "mainwindow.h"
 #include "const.h"
 #include <QDialog>
 #include <QImage>
 #include <QLabel>
+#include <QCloseEvent>
+#include <QFile>
 
 namespace Ui { class WindowTwo; }
 
@@ -42,8 +45,8 @@ private:
     RecognizeImgThread *recognizeThread = nullptr; // 新增：识别线程
     CameraThread *cameraThread;  // 指向相机线程对象的指针，用于管理相机捕获
 
-    QString labelPath = LABEL_PATH;   // 你的标签路径
-    QString modelPath = MODEL_PATH;    // 你的模型路径
+    QString labelPath;
+    QString modelPath;
 };
 
 #endif // WINDOW_TWO_H

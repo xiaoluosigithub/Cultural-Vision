@@ -1,0 +1,188 @@
+/* --------------------------------------------------
+   File: WindowTwo.qss
+   Theme: Google Chrome Inspired (Light & Minimal)
+   Qt Compatible Version
+   -------------------------------------------------- */
+
+/* 全局基础样式 */
+* {
+    font-family: "Segoe UI", "Microsoft YaHei";
+}
+
+/* ------------------------
+   主窗口整体
+   ------------------------ */
+QDialog#WindowTwo {
+    background-color: #f9f9fb;          /* 柔和浅灰背景 */
+    border: none;
+    border-radius: 8px;
+}
+
+/* ------------------------
+   左侧控制区域
+   ------------------------ */
+QWidget#LeftWidget {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* 通用按钮样式 */
+QPushButton {
+    background-color: #f1f3f4;
+    color: #202124;
+    font-size: 15px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    min-height: 36px;
+}
+
+/* 按钮悬停效果 */
+QPushButton:hover {
+    background-color: #e8eaed;
+    border-color: #c4c7cc;
+}
+
+/* 按钮按下时 */
+QPushButton:pressed {
+    background-color: #d2e3fc;
+    border-color: #1a73e8;
+    color: #174ea6;
+}
+
+/* 特殊按钮：开始检测 */
+QPushButton#btnStart {
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+}
+QPushButton#btnStart:hover {
+    background-color: #1967d2;
+}
+QPushButton#btnStart:pressed {
+    background-color: #174ea6;
+}
+
+/* 特殊按钮：结束检测 */
+QPushButton#btnStop {
+    background-color: #f1f3f4;
+    color: #3c4043;
+}
+QPushButton#btnStop:hover {
+    background-color: #e8eaed;
+}
+QPushButton#btnStop:pressed {
+    background-color: #dadce0;
+}
+
+/* 关闭页面按钮 */
+QPushButton#closeBtn {
+    background-color: #f1f3f4;
+    color: #3c4043;
+}
+QPushButton#closeBtn:hover {
+    background-color: #e8eaed;
+}
+QPushButton#closeBtn:pressed {
+    background-color: #dadce0;
+}
+
+/* 设置摄像头按钮 */
+QPushButton#setBtn {
+    background-color: #f1f3f4;
+    color: #202124;
+}
+QPushButton#setBtn:hover {
+    background-color: #e8eaed;
+}
+QPushButton#setBtn:pressed {
+    background-color: #dadce0;
+}
+
+/* 摄像头信息标签 */
+QLabel#labelCameraInfo {
+    color: #5f6368;
+    font-size: 14px;
+    padding-left: 8px;
+}
+
+/* 状态标签 */
+QLabel#statusLabel {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #202124;
+    font-weight: 500;
+}
+
+/* ------------------------
+   右侧内容展示区域
+   ------------------------ */
+QWidget#Rightwidget {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* 摄像头实时画面 */
+QLabel#cameraLabel {
+    background-color: #f9f9fb;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    min-height: 480px;
+}
+
+/* 检测结果标签 */
+QLabel#resultLabel {
+    font-size: 16px;
+    color: #202124;
+    font-weight: 600;
+}
+
+/* 置信度标签 */
+QLabel#conLabel {
+    font-size: 16px;
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+/* ------------------------
+   滚动条样式（若有）
+   ------------------------ */
+QScrollBar:vertical {
+    background: #f1f3f4;
+    width: 10px;
+    margin: 0;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #c4c7cc;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #9aa0a6;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+/* ------------------------
+   布局间距统一
+   ------------------------ */
+QHBoxLayout#horizontalLayout,
+QHBoxLayout#horizontalLayout_2,
+QHBoxLayout#horizontalLayout_3,
+QHBoxLayout#horizontalLayout_4 {
+    spacing: 8px;
+}
+QVBoxLayout#verticalLayout,
+QVBoxLayout#verticalLayout_2,
+QVBoxLayout#verticalLayout_3,
+QVBoxLayout#verticalLayout_4 {
+    spacing: 6px;
+}

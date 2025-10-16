@@ -25,8 +25,8 @@ WindowOne::WindowOne(QWidget *parent)
         qssFile.close();
     }
 
-    this->setWindowTitle("图片分类");  // 设置窗口标题
-    this->setWindowIcon(QIcon(":/icon/core.png"));  // 设置窗口图标（需确保资源路径正确）
+    this->setWindowTitle("图片检测");  // 设置窗口标题
+    this->setWindowIcon(QIcon(":/icon/window_one.png"));  // 设置窗口图标
 
     // 关闭按钮
     connect(ui->closeBtn, &QPushButton::clicked, this, &WindowOne::handleClose);

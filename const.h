@@ -19,8 +19,11 @@ enum PicBtnState{
     PicBtnState2Press = 6,
 };
 
-const QString LABEL_PATH = "E:/Learn_Qt/project2/label/class_names.txt";
-const QString MODEL_PATH = "E:/Learn_Qt/project2/model/best.onnx";
+// const QString DEF_LABEL_PATH = "E:/Learn_Qt/project2/label/class_names.txt";
+// const QString DEF_MODEL_PATH = "E:/Learn_Qt/project2/model/best.onnx";
+
+const QString DEF_LABEL_PATH = ":/label/class_names.txt";
+const QString DEF_MODEL_PATH = ":/model/best.onnx";
 
 const int PROGRESS_WIDTH = 300;
 const int PROGRESS_MAX = 300;

@@ -1,0 +1,121 @@
+/* --------------------------------------------------
+   File: SettingDialog.qss
+   Theme: Google Chrome Inspired (Light & Minimal)
+   Qt Compatible Version
+   -------------------------------------------------- */
+
+/* 全局基础样式 */
+* {
+    font-family: "Segoe UI", "Microsoft YaHei";
+    font-size: 14px;
+}
+
+/* ------------------------
+   对话框整体
+   ------------------------ */
+QDialog#SettingDialog {
+    background-color: #f9f9fb;          /* 柔和浅灰背景 */
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* ------------------------
+   标题标签
+   ------------------------ */
+QLabel#labelTitle {
+    color: #202124;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 6px 10px;
+}
+
+/* ------------------------
+   下拉框（摄像头选择）
+   ------------------------ */
+QComboBox#comboBoxCamera {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #202124;
+    min-width: 150px;
+}
+QComboBox#comboBoxCamera:hover {
+    border-color: #c4c7cc;
+}
+QComboBox#comboBoxCamera:pressed {
+    border-color: #1a73e8;
+}
+
+/* 下拉菜单弹出项 */
+QComboBox QAbstractItemView {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    selection-background-color: #e8f0fe;
+    selection-color: #174ea6;
+    outline: none;
+}
+
+/* ------------------------
+   按钮统一风格
+   ------------------------ */
+QPushButton {
+    background-color: #f1f3f4;
+    color: #202124;
+    font-size: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    padding: 6px 14px;
+    min-height: 32px;
+}
+
+/* 悬停效果 */
+QPushButton:hover {
+    background-color: #e8eaed;
+    border-color: #c4c7cc;
+}
+
+/* 按下效果 */
+QPushButton:pressed {
+    background-color: #d2e3fc;
+    border-color: #1a73e8;
+    color: #174ea6;
+}
+
+/* 确认按钮 */
+QPushButton#btnOK {
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+}
+QPushButton#btnOK:hover {
+    background-color: #1967d2;
+}
+QPushButton#btnOK:pressed {
+    background-color: #174ea6;
+}
+
+/* 取消按钮 */
+QPushButton#btnCancel {
+    background-color: #f1f3f4;
+    color: #3c4043;
+}
+QPushButton#btnCancel:hover {
+    background-color: #e8eaed;
+}
+QPushButton#btnCancel:pressed {
+    background-color: #dadce0;
+}
+
+/* ------------------------
+   布局统一
+   ------------------------ */
+QHBoxLayout#horizontalLayout,
+QHBoxLayout#horizontalLayout_2 {
+    spacing: 10px;
+}
+QVBoxLayout#verticalLayout {
+    spacing: 15px;
+}

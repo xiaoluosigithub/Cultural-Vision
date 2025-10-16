@@ -22,11 +22,6 @@ CameraThread::CameraThread(QObject *parent)
  */
 bool CameraThread::openCamera(int index)
 {
-    // if (cap.open(index)) {  // 尝试打开指定索引的相机
-    //     return true;        // 打开成功返回true
-    // }
-    // return false;           // 打开失败返回false
-
     // 尝试使用 DirectShow 后端
     cap.open(index, cv::CAP_DSHOW);
     if (!cap.isOpened()) {
@@ -34,8 +29,8 @@ bool CameraThread::openCamera(int index)
         cap.open(index);
     }
     return cap.isOpened();
-
 }
+
 
 bool CameraThread::getLastFrame(cv::Mat &outFrame)
 {
@@ -89,12 +84,7 @@ void CameraThread::run()
     cap.release();
 }
 
-/**
- * @brief 停止相机捕获线程
- *
- * 设置running标志为false，这将导致run()函数中的循环在下一次迭代时退出，
- * 从而优雅地停止线程执行。注意：线程不会立即停止，而是会在完成当前循环迭代后停止。
- */
+// 停止相机捕获线程
 void CameraThread::stop()
 {
     running = false;  // 设置运行标志为false，通知线程停止

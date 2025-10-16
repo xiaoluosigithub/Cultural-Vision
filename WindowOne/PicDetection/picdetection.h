@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include "recognizeimgthread.h"
+#include "mainwindow.h"
 #include "const.h"
 
 namespace Ui {

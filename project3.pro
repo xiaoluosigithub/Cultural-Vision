@@ -97,4 +97,6 @@ INCLUDEPATH += E:/onnxruntime/onnxruntime-win-x64-1.16.0/include  # 头文件目
 DEPENDPATH += E:/onnxruntime/onnxruntime-win-x64-1.16.0/include     # 库文件目录
 
 RESOURCES += \
-    resource.qrc
+    res.qrc
+
+RC_ICONS = icon/16.ico

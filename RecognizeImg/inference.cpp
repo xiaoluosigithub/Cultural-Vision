@@ -6,6 +6,7 @@
 
 YOLO_V8::YOLO_V8() {
     // 空实现，可在此添加默认成员初始化
+    cudaEnable = false;
 }
 
 YOLO_V8::~YOLO_V8() {
